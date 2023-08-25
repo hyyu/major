@@ -5,5 +5,9 @@ build/
 local.properties
 
 # Gradle generated files
-/.gradle/
+.gradle/
 
+.idea/
+
+test/
+androidTest/
