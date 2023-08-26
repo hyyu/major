@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="icon_visibility_content_description">Password visibility icon</string>
+    <string name="icon_snackbar_content_description">Snackbar icon</string>
+    <string name="back_button">Back</string>
+
+</resources>

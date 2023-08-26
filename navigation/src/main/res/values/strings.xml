@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_root_navigator">Root</string>
+    <string name="title_auth_page">Sign in</string>
+    <string name="title_register_page">Sign up</string>
+    <string name="title_home_page">Home</string>
+</resources>
