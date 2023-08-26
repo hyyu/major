@@ -1,0 +1,8 @@
+.gradle/
+build/
+
+### STS ###
+bin/
+
+### IntelliJ IDEA ###
+.idea/
