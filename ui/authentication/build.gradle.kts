@@ -67,8 +67,7 @@ dependencies {
         AndroidX.compose.ui,
         AndroidX.compose.ui.text.googleFonts,
         AndroidX.compose.ui.graphics,
-        AndroidX.compose.ui.toolingPreview,
-        AndroidX.hilt.navigationCompose
+        AndroidX.compose.ui.toolingPreview
     )
 
     testImplementation(Testing.junit4)

@@ -10,7 +10,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.hilt.navigation.compose.hiltViewModel
 import io.cloudyhug.authentication.AuthViewModel
 import io.cloudyhug.authentication.event.AuthenticationEvent
 import io.cloudyhug.authentication.state.Page
@@ -19,7 +18,7 @@ import io.cloudyhug.navigation.Screen
 
 @Composable
 fun Authentication(
-    viewModel: AuthViewModel = hiltViewModel(),
+    viewModel: AuthViewModel,
     page: Page,
     currentScreen: Screen,
     canNavigateBack: Boolean,

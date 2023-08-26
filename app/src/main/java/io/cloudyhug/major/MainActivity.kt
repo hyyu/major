@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -61,6 +62,7 @@ class MainActivity : ComponentActivity() {
         ) {
             composable(route = Screen.Login.name) {
                 Authentication(
+                    viewModel = hiltViewModel(),
                     page = Page.Login,
                     currentScreen = currentScreen,
                     canNavigateBack = navController.previousBackStackEntry != null,
@@ -77,6 +79,7 @@ class MainActivity : ComponentActivity() {
             }
             composable(route = Screen.Register.name) {
                 Authentication(
+                    viewModel = hiltViewModel(),
                     page = Page.Register,
                     currentScreen = currentScreen,
                     canNavigateBack = navController.previousBackStackEntry != null,
