@@ -38,6 +38,22 @@ class MainActivity : ComponentActivity() {
                 val currentScreen = Screen.valueOf(
                     backStackEntry?.destination?.route ?: Screen.Login.name
                 )
+                val appBarData = AppBarData(
+                    canNavigateBack = navController.previousBackStackEntry != null,
+                    currentScreen = currentScreen
+                )
+
+                val authNavigator = AuthNavigator(
+                    navigateUp = { navController.navigateUp() },
+                    navigateToRegister = { navController.navigate(Screen.Register.name) },
+                    onUserAuthenticated = {
+                        navController.navigate(Screen.Home.name) {
+                            popUpTo(Screen.Login.name) {
+                                inclusive = true
+                            }
+                        }
+                    }
+                )
 
                 Surface(
                     modifier = Modifier.fillMaxSize(),
@@ -45,7 +61,8 @@ class MainActivity : ComponentActivity() {
                 ) {
                     Navigation(
                         navController = navController,
-                        currentScreen = currentScreen
+                        appBarData = appBarData,
+                        authNavigator = authNavigator
                     )
                 }
             }
@@ -55,25 +72,9 @@ class MainActivity : ComponentActivity() {
     @Composable
     private fun Navigation(
         navController: NavHostController,
-        currentScreen: Screen,
+        appBarData: AppBarData,
+        authNavigator: AuthNavigator
     ) {
-        val authNavigator = AuthNavigator(
-            navigateUp = { navController.navigateUp() },
-            navigateToRegister = { navController.navigate(Screen.Register.name) },
-            onUserAuthenticated = {
-                navController.navigate(Screen.Home.name) {
-                    popUpTo(Screen.Login.name) {
-                        inclusive = true
-                    }
-                }
-            }
-        )
-
-        val appBarData = AppBarData(
-            canNavigateBack = navController.previousBackStackEntry != null,
-            currentScreen = currentScreen
-        )
-
         NavHost(
             navController = navController,
             route = Screen.Root.name,

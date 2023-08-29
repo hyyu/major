@@ -73,9 +73,9 @@ fun Authentication(
             page = page,
             login = login,
             password = password,
-            formListener = formListener,
             uiState = state,
             onSendButtonClicked = if (page == Page.Login) onSendClickedAuthenticate else onSendClickedRegister,
+            formListener = formListener,
             onRegisterPageRequested = navigator.navigateToRegister
         )
     }

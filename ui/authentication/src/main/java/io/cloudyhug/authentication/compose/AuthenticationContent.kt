@@ -24,11 +24,11 @@ import io.cloudyhug.ui.authentication.R.string
 @Composable
 fun AuthenticationContent(
     modifier: Modifier = Modifier,
-    formListener: FormListener,
     page: Page,
     login: String = "",
     password: String = "",
     uiState: AuthenticationState,
+    formListener: FormListener = FormListener({}, {}),
     onSendButtonClicked: () -> Unit = {},
     onRegisterPageRequested: () -> Unit = {},
 ) {
@@ -42,6 +42,8 @@ fun AuthenticationContent(
             logoContentDescription = stringResource(id = string.icon_cake_content_description),
             title = stringResource(id = string.app_name)
         )
+
+        Spacer(modifier = Modifier.height(12.dp))
 
         CredentialsFormBlock(
             login = login,

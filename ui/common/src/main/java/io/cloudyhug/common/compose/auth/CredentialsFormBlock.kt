@@ -34,7 +34,7 @@ fun CredentialsFormBlock(
     var passwordVisibility: Boolean by remember { mutableStateOf(false) }
 
     OutlinedTextField(
-        modifier = Modifier.fillMaxWidth(0.65f),
+        modifier = Modifier.fillMaxWidth(0.6f),
         value = login,
         onValueChange = formListener.onLoginChanged,
         textStyle = MaterialTheme.typography.bodyLarge,
@@ -49,7 +49,7 @@ fun CredentialsFormBlock(
     Spacer(modifier = Modifier.height(8.dp))
 
     OutlinedTextField(
-        modifier = Modifier.fillMaxWidth(0.65f),
+        modifier = Modifier.fillMaxWidth(0.6f),
         value = password,
         onValueChange = formListener.onPasswordChanged,
         textStyle = MaterialTheme.typography.bodyLarge,
