@@ -3,7 +3,7 @@ package io.cloudyhug.major.ui.compose.preview.scaffold
 import android.content.res.Configuration
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import io.cloudyhug.common.compose.frame.MajorAppBar
+import io.cloudyhug.common.frame.compose.MajorAppBar
 import io.cloudyhug.major.ui.theme.MajorTheme
 import io.cloudyhug.navigation.Screen
 

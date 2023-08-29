@@ -19,6 +19,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
+import io.cloudyhug.common.compose.auth.listener.FormListener
 import io.cloudyhug.ui.common.R.drawable
 import io.cloudyhug.ui.common.R.string
 
@@ -28,15 +29,14 @@ fun CredentialsFormBlock(
     login: String,
     passwordLabel: String,
     password: String,
-    onLoginChanged: (String) -> Unit,
-    onPasswordChanged: (String) -> Unit
+    formListener: FormListener
 ) {
     var passwordVisibility: Boolean by remember { mutableStateOf(false) }
 
     OutlinedTextField(
         modifier = Modifier.fillMaxWidth(0.65f),
         value = login,
-        onValueChange = onLoginChanged,
+        onValueChange = formListener.onLoginChanged,
         textStyle = MaterialTheme.typography.bodyLarge,
         label = {
             Text(
@@ -51,7 +51,7 @@ fun CredentialsFormBlock(
     OutlinedTextField(
         modifier = Modifier.fillMaxWidth(0.65f),
         value = password,
-        onValueChange = onPasswordChanged,
+        onValueChange = formListener.onPasswordChanged,
         textStyle = MaterialTheme.typography.bodyLarge,
         visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
         label = {

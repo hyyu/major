@@ -13,28 +13,32 @@ import androidx.compose.ui.Modifier
 import io.cloudyhug.authentication.AuthViewModel
 import io.cloudyhug.authentication.event.AuthenticationEvent
 import io.cloudyhug.authentication.state.Page
-import io.cloudyhug.common.compose.frame.Frame
-import io.cloudyhug.navigation.Screen
+import io.cloudyhug.common.compose.auth.listener.FormListener
+import io.cloudyhug.common.frame.compose.Frame
+import io.cloudyhug.common.frame.model.AppBarData
+import io.cloudyhug.navigation.navigator.AuthNavigator
 
 @Composable
 fun Authentication(
     viewModel: AuthViewModel,
+    navigator: AuthNavigator,
+    appBarData: AppBarData,
     page: Page,
-    currentScreen: Screen,
-    canNavigateBack: Boolean,
-    navigateUp: () -> Unit = {},
-    onRegisterPageRequested: () -> Unit = {},
-    onUserAuthenticated: () -> Unit = {},
 ) {
     val state by viewModel.uiState.collectAsState()
 
     LaunchedEffect(key1 = state.isAuthenticated) {
         if (state.isAuthenticated)
-            onUserAuthenticated()
+            navigator.onUserAuthenticated()
     }
 
     var login by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+
+    val formListener = FormListener(
+        onLoginChanged = { login = it },
+        onPasswordChanged = { password = it }
+    )
 
     val onSendClickedAuthenticate = {
         viewModel.handleEvent(
@@ -57,9 +61,8 @@ fun Authentication(
     Frame(
         modifier = Modifier
             .fillMaxSize(),
-        currentScreen = currentScreen,
-        canNavigateBack = canNavigateBack,
-        navigateUp = navigateUp,
+        appBarData = appBarData,
+        navigateUp = navigator.navigateUp,
         snackbarState = viewModel.snackbarState,
         onShowSnackbar = { viewModel.snackbarDisplayed() }
     ) { paddingValues ->
@@ -70,11 +73,10 @@ fun Authentication(
             page = page,
             login = login,
             password = password,
+            formListener = formListener,
             uiState = state,
-            onLoginChanged = { login = it },
-            onPasswordChanged = { password = it },
             onSendButtonClicked = if (page == Page.Login) onSendClickedAuthenticate else onSendClickedRegister,
-            onRegisterPageRequested = onRegisterPageRequested
+            onRegisterPageRequested = navigator.navigateToRegister
         )
     }
 }

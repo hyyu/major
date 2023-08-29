@@ -1,4 +1,4 @@
-package io.cloudyhug.common.compose.snackbar
+package io.cloudyhug.common.snackbar.compose
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -17,8 +17,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import io.cloudyhug.common.model.snackbar.SnackbarType
-import io.cloudyhug.common.model.snackbar.toModel
+import io.cloudyhug.common.snackbar.model.SnackbarType
+import io.cloudyhug.common.snackbar.model.toModel
 import io.cloudyhug.ui.common.R
 
 @Composable

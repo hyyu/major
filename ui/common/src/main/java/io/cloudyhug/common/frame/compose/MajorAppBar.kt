@@ -1,4 +1,4 @@
-package io.cloudyhug.common.compose.frame
+package io.cloudyhug.common.frame.compose
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -38,7 +38,7 @@ fun MajorAppBar(
                 IconButton(onClick = navigateUp) {
                     Icon(
                         imageVector = Icons.Filled.ArrowBack,
-                        contentDescription = stringResource(string.back_button)
+                        contentDescription = stringResource(string.icon_navigate_up_button_content_description)
                     )
                 }
             }

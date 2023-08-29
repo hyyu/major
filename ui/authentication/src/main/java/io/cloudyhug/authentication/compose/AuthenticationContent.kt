@@ -14,6 +14,8 @@ import androidx.compose.ui.unit.dp
 import io.cloudyhug.authentication.state.AuthenticationState
 import io.cloudyhug.authentication.state.Page
 import io.cloudyhug.common.compose.auth.CredentialsFormBlock
+import io.cloudyhug.common.compose.auth.RegisterBlock
+import io.cloudyhug.common.compose.auth.listener.FormListener
 import io.cloudyhug.common.compose.button.ButtonWithLoader
 import io.cloudyhug.common.compose.display.TitleBlock
 import io.cloudyhug.ui.authentication.R.drawable
@@ -22,14 +24,13 @@ import io.cloudyhug.ui.authentication.R.string
 @Composable
 fun AuthenticationContent(
     modifier: Modifier = Modifier,
+    formListener: FormListener,
     page: Page,
     login: String = "",
     password: String = "",
     uiState: AuthenticationState,
-    onLoginChanged: (String) -> Unit = {},
-    onPasswordChanged: (String) -> Unit = {},
     onSendButtonClicked: () -> Unit = {},
-    onRegisterPageRequested: () -> Unit = {}
+    onRegisterPageRequested: () -> Unit = {},
 ) {
     Column(
         modifier = modifier,
@@ -47,8 +48,7 @@ fun AuthenticationContent(
             loginLabel = stringResource(string.label_login),
             password = password,
             passwordLabel = stringResource(string.label_password),
-            onLoginChanged = onLoginChanged,
-            onPasswordChanged = onPasswordChanged
+            formListener = formListener
         )
 
         Spacer(modifier = Modifier.height(32.dp))

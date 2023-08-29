@@ -20,8 +20,10 @@ import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
 import io.cloudyhug.authentication.state.Page
 import io.cloudyhug.authentication.compose.Authentication
+import io.cloudyhug.common.frame.model.AppBarData
 import io.cloudyhug.home.compose.Home
 import io.cloudyhug.major.ui.theme.MajorTheme
+import io.cloudyhug.navigation.navigator.AuthNavigator
 import io.cloudyhug.navigation.Screen
 
 @AndroidEntryPoint
@@ -53,8 +55,25 @@ class MainActivity : ComponentActivity() {
     @Composable
     private fun Navigation(
         navController: NavHostController,
-        currentScreen: Screen
+        currentScreen: Screen,
     ) {
+        val authNavigator = AuthNavigator(
+            navigateUp = { navController.navigateUp() },
+            navigateToRegister = { navController.navigate(Screen.Register.name) },
+            onUserAuthenticated = {
+                navController.navigate(Screen.Home.name) {
+                    popUpTo(Screen.Login.name) {
+                        inclusive = true
+                    }
+                }
+            }
+        )
+
+        val appBarData = AppBarData(
+            canNavigateBack = navController.previousBackStackEntry != null,
+            currentScreen = currentScreen
+        )
+
         NavHost(
             navController = navController,
             route = Screen.Root.name,
@@ -63,35 +82,17 @@ class MainActivity : ComponentActivity() {
             composable(route = Screen.Login.name) {
                 Authentication(
                     viewModel = hiltViewModel(),
-                    page = Page.Login,
-                    currentScreen = currentScreen,
-                    canNavigateBack = navController.previousBackStackEntry != null,
-                    navigateUp = { navController.navigateUp() },
-                    onRegisterPageRequested = { navController.navigate(Screen.Register.name) },
-                    onUserAuthenticated = {
-                        navController.navigate(Screen.Home.name) {
-                            popUpTo(Screen.Login.name) {
-                                inclusive = true
-                            }
-                        }
-                    }
+                    navigator = authNavigator,
+                    appBarData = appBarData,
+                    page = Page.Login
                 )
             }
             composable(route = Screen.Register.name) {
                 Authentication(
                     viewModel = hiltViewModel(),
+                    navigator = authNavigator,
+                    appBarData = appBarData,
                     page = Page.Register,
-                    currentScreen = currentScreen,
-                    canNavigateBack = navController.previousBackStackEntry != null,
-                    navigateUp = { navController.navigateUp() },
-                    onRegisterPageRequested = { navController.navigate(Screen.Register.name) },
-                    onUserAuthenticated = {
-                        navController.navigate(Screen.Home.name) {
-                            popUpTo(Screen.Login.name) {
-                                inclusive = true
-                            }
-                        }
-                    }
                 )
             }
             composable(route = Screen.Home.name) {
