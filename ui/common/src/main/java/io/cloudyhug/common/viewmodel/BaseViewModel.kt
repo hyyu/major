@@ -1,8 +1,8 @@
 package io.cloudyhug.common.viewmodel
 
 import androidx.lifecycle.ViewModel
-import io.cloudyhug.common.model.snackbar.MajorSnackbarData
-import io.cloudyhug.common.model.snackbar.SnackbarType
+import io.cloudyhug.common.snackbar.model.MajorSnackbarData
+import io.cloudyhug.common.snackbar.model.SnackbarType
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 

@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -19,8 +20,10 @@ import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
 import io.cloudyhug.authentication.state.Page
 import io.cloudyhug.authentication.compose.Authentication
+import io.cloudyhug.common.frame.model.AppBarData
 import io.cloudyhug.home.compose.Home
 import io.cloudyhug.major.ui.theme.MajorTheme
+import io.cloudyhug.navigation.navigator.AuthNavigator
 import io.cloudyhug.navigation.Screen
 
 @AndroidEntryPoint
@@ -35,6 +38,22 @@ class MainActivity : ComponentActivity() {
                 val currentScreen = Screen.valueOf(
                     backStackEntry?.destination?.route ?: Screen.Login.name
                 )
+                val appBarData = AppBarData(
+                    canNavigateBack = navController.previousBackStackEntry != null,
+                    currentScreen = currentScreen
+                )
+
+                val authNavigator = AuthNavigator(
+                    navigateUp = { navController.navigateUp() },
+                    navigateToRegister = { navController.navigate(Screen.Register.name) },
+                    onUserAuthenticated = {
+                        navController.navigate(Screen.Home.name) {
+                            popUpTo(Screen.Login.name) {
+                                inclusive = true
+                            }
+                        }
+                    }
+                )
 
                 Surface(
                     modifier = Modifier.fillMaxSize(),
@@ -42,7 +61,8 @@ class MainActivity : ComponentActivity() {
                 ) {
                     Navigation(
                         navController = navController,
-                        currentScreen = currentScreen
+                        appBarData = appBarData,
+                        authNavigator = authNavigator
                     )
                 }
             }
@@ -52,7 +72,8 @@ class MainActivity : ComponentActivity() {
     @Composable
     private fun Navigation(
         navController: NavHostController,
-        currentScreen: Screen
+        appBarData: AppBarData,
+        authNavigator: AuthNavigator
     ) {
         NavHost(
             navController = navController,
@@ -61,34 +82,18 @@ class MainActivity : ComponentActivity() {
         ) {
             composable(route = Screen.Login.name) {
                 Authentication(
-                    page = Page.Login,
-                    currentScreen = currentScreen,
-                    canNavigateBack = navController.previousBackStackEntry != null,
-                    navigateUp = { navController.navigateUp() },
-                    onRegisterPageRequested = { navController.navigate(Screen.Register.name) },
-                    onUserAuthenticated = {
-                        navController.navigate(Screen.Home.name) {
-                            popUpTo(Screen.Login.name) {
-                                inclusive = true
-                            }
-                        }
-                    }
+                    viewModel = hiltViewModel(),
+                    navigator = authNavigator,
+                    appBarData = appBarData,
+                    page = Page.Login
                 )
             }
             composable(route = Screen.Register.name) {
                 Authentication(
+                    viewModel = hiltViewModel(),
+                    navigator = authNavigator,
+                    appBarData = appBarData,
                     page = Page.Register,
-                    currentScreen = currentScreen,
-                    canNavigateBack = navController.previousBackStackEntry != null,
-                    navigateUp = { navController.navigateUp() },
-                    onRegisterPageRequested = { navController.navigate(Screen.Register.name) },
-                    onUserAuthenticated = {
-                        navController.navigate(Screen.Home.name) {
-                            popUpTo(Screen.Login.name) {
-                                inclusive = true
-                            }
-                        }
-                    }
                 )
             }
             composable(route = Screen.Home.name) {

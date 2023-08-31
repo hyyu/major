@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- Content descriptions -->
+    <string name="icon_navigate_up_button_content_description">Up button</string>
     <string name="icon_visibility_content_description">Password visibility icon</string>
     <string name="icon_snackbar_content_description">Snackbar icon</string>
-    <string name="back_button">Back</string>
+
+    <!-- RegisterBlock -->
+    <string name="label_suggest_to_register">No account? Register here</string>
 
 </resources>

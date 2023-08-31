@@ -1,4 +1,4 @@
-package io.cloudyhug.common.model.snackbar
+package io.cloudyhug.common.snackbar.model
 
 enum class SnackbarType {
     VALIDATION, ERROR, NEUTRAL;

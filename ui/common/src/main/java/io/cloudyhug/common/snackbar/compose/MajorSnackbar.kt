@@ -1,8 +1,8 @@
-package io.cloudyhug.common.compose.snackbar
+package io.cloudyhug.common.snackbar.compose
 
 import androidx.compose.material3.SnackbarData
 import androidx.compose.runtime.Composable
-import io.cloudyhug.common.model.snackbar.SnackbarType
+import io.cloudyhug.common.snackbar.model.SnackbarType
 
 @Composable
 fun MajorSnackbar(data: SnackbarData) {

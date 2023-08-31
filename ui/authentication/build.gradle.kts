@@ -67,9 +67,10 @@ dependencies {
         AndroidX.compose.ui,
         AndroidX.compose.ui.text.googleFonts,
         AndroidX.compose.ui.graphics,
-        AndroidX.compose.ui.toolingPreview,
-        AndroidX.hilt.navigationCompose
+        AndroidX.compose.ui.toolingPreview
     )
+
+    implementation(AndroidX.Lifecycle.viewModelKtx)
 
     testImplementation(Testing.junit4)
     androidTestImplementation(AndroidX.test.ext.junit)

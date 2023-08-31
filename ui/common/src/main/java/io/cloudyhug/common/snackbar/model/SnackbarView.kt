@@ -1,4 +1,4 @@
-package io.cloudyhug.common.model.snackbar
+package io.cloudyhug.common.snackbar.model
 
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
@@ -9,7 +9,7 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
-import io.cloudyhug.common.model.snackbar.SnackbarType.*
+import io.cloudyhug.common.snackbar.model.SnackbarType.*
 
 data class SnackbarView(
     val backgroundColor: Color,

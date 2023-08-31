@@ -4,8 +4,8 @@ import android.content.res.Configuration
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import io.cloudyhug.common.compose.snackbar.MajorSnackbarContent
-import io.cloudyhug.common.model.snackbar.SnackbarType
+import io.cloudyhug.common.snackbar.compose.MajorSnackbarContent
+import io.cloudyhug.common.snackbar.model.SnackbarType
 import io.cloudyhug.major.ui.theme.MajorTheme
 
 @Preview(name = "Light theme", uiMode = Configuration.UI_MODE_NIGHT_NO)
